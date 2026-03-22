@@ -6,6 +6,6 @@ labels:
   pairs:
     env: dev
 resources:
-  - ../../base
+  - ../base
 # Add a prefix to all resource names
 # namePrefix: dev-
