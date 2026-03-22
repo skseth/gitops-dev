@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aankalan
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # Ensures children are deleted
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/skseth/gitops-dev.git'
+    targetRevision: HEAD
+    path: app-argocd/base/aankalan
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

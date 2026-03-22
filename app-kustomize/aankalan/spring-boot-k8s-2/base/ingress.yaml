@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    # Traefik is the default in Rancher Desktop; no extra config needed
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - host: "spring-boot-k8s1.test"  # Or your custom local domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: spring-boot-k8s-2
+            port:
+              number: 8080

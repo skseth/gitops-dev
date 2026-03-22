@@ -7,13 +7,13 @@ metadata:
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
-  - host: "spring-boot-k8s1.test"  # Or your custom local domain
+  - host: "spring-boot-k8s-1.test"  # Or your custom local domain
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: spring-boot-k8s1
+            name: spring-boot-k8s-1
             port:
               number: 8080
