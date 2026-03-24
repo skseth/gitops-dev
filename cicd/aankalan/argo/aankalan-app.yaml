@@ -8,7 +8,7 @@
     source:
       repoURL: 'https://github.com/skseth/gitops-dev.git'
       targetRevision: HEAD
-      path: app-kustomize/aankalan/k8s/overlays/dev
+      path: cicd/aankalan/k8s/overlays/dev
     destination:
       server: https://kubernetes.default.svc
       namespace: apps
