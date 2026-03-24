@@ -23,7 +23,8 @@ create_child_app_yaml() {
 	local kustomize_dir="$1"
 
 	local env=$(basename "$kustomize_dir")
-	local app_dir=$(dirname "$kustomize_dir")
+	local overlays_dir=$(dirname "$kustomize_dir")
+	local app_dir=$(dirname "$overlays_dir")
 	local app_name=$(basename "$app_dir")
 	local app_of_app_dir=$(dirname "$app_dir")
 	local app_of_app_name=$(basename "$app_of_app_dir")
