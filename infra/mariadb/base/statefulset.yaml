@@ -1,0 +1,45 @@
+# mariadb-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-statefulset
+spec:
+  serviceName: mariadb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
+        - name: mariadb-config-volume
+          configMap:
+            # Provide the name of the ConfigMap
+            name: mariadb-config
+            # Specify the file name within the ConfigMap to mount
+            items:
+            - key: my.cnf
+              path: my.cnf                
+      containers:
+        - name: mariadb
+          image: mariadb:latest
+          env:
+          - name: MYSQL_ROOT_PASSWORD # The MySQL image expects this specific env var
+            valueFrom:
+              secretKeyRef:
+                name: mariadb-secret # Name of the Secret object
+                key: MYSQL_ROOT_PASSWORD # Key in the Secret that contains the password                
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: storage
+              mountPath: /var/lib/mysql
+            - name: mariadb-config-volume
+              mountPath: /etc/mysql/conf.d/
+              readOnly: true

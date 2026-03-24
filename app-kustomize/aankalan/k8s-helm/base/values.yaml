@@ -1,0 +1,9 @@
+services:
+  spring-boot-k8s-1:
+    imageTag: "1.0.0"
+  spring-boot-k8s-2:
+    imageTag: "1.0.0"
+
+
+
+

@@ -31250,6 +31250,7 @@ data:
       - BackgroundScanReport
       - ClusterBackgroundScanReport
       - UpdateRequest
+  kustomize.buildOptions: --enable-helm
 kind: ConfigMap
 metadata:
   labels:

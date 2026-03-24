@@ -1,0 +1,13 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: aankalan        
+
+requires:
+  - path: ../../infra/mariadb
+
+profiles:
+  - name: dev
+
+
+

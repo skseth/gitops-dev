@@ -22,3 +22,4 @@ spec:
           value: "spring-boot-k8s-1"
         - name: SERVER_PORT
           value: "8080"
+

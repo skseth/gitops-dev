@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service # <-- Name used for DNS
+  labels:
+    app: mariadb
+spec:
+  ports:
+    - port: 3306 # The port the service itself exposes
+      name: mariadb-port
+      targetPort: 3306 # The port your MariaDB container listens on
+  selector:
+    app: mariadb # <-- Matches labels on your StatefulSet Pods
+  clusterIP: None # <-- Makes it a Headless Service

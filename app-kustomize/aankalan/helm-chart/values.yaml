@@ -1,0 +1,16 @@
+
+services:
+  spring-boot-k8s-1:
+    imageRepository: spring-boot-k8s
+    imageTag: "latest"
+    port: "8080"
+    replicas: "1"
+  spring-boot-k8s-2:
+    imageRepository: spring-boot-k8s
+    imageTag: "latest"
+    port: "8080"
+    replicas: "1"
+
+
+
+

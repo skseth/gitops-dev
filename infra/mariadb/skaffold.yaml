@@ -1,0 +1,27 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: infra-mariadb
+manifests:
+  kustomize:
+    paths:
+      - overlays/base
+
+profiles:
+  - name: dev
+    activation:
+      - kubeContext: rancher-desktop
+    manifests:
+      kustomize:
+        paths:
+          - overlays/dev
+    deploy:
+      kubectl:
+        defaultNamespace: db
+      
+portForward:
+- resourceType: service
+  resourceName: mariadb-service
+  port: 3306
+  localPort: 3306
+

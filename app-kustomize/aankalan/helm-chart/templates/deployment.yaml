@@ -1,0 +1,30 @@
+{{- range $name, $config := .Values.services }}
+{{ $services := list "spring-boot-k8s-1" "spring-boot-k8s-2" }}
+{{- if has $name  $services -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+spec:
+  replicas: {{ $config.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}
+    spec:
+      containers:
+        - name: {{ $name }}
+          image: "{{ $config.imageRepository }}:{{ $config.imageTag }}"
+          ports:
+            - containerPort: {{ $config.port }}
+          env:
+          - name: SPRING_APP_NAME
+            value: "{{ $name }}"
+          - name: SERVER_PORT
+            value: "{{ $config.port }}"
+---
+{{- end }}
+{{- end }}

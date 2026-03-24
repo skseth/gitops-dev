@@ -1,0 +1,12 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: spring-boot-k8s
+build:
+  local:
+    push: false
+  artifacts:
+  - image: spring-boot-k8s
+    jib:
+      # project can be the relative directory
+      project: .
