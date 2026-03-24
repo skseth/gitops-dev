@@ -3,11 +3,13 @@ kind: Kustomization
 
 # Points to the directories containing the child kustomizations
 resources:
-  - ../../base
+  - pvc.yaml
+  - service.yaml
+  - deployment.yaml
 
 # Transformations applied to ALL children
 labels:
 - pairs:
     product: infra
-    env: dev
+    env: base
 

@@ -3,11 +3,11 @@ kind: Kustomization
 
 # Points to the directories containing the child kustomizations
 resources:
-  - ../../base
+  - ./spring-boot-k8s-1
+  - ./spring-boot-k8s-2
 
 # Transformations applied to ALL children
 labels:
 - pairs:
-    product: infra
-    env: dev
-
+    product: aank
+    env: base

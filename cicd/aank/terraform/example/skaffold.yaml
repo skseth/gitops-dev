@@ -1,0 +1,15 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: aank        
+
+requires:
+  - path: ../../../../infra/mariadb
+  - path: ../../../../infra/minio
+
+profiles:
+  - name: dev
+    activation:
+      - kubeContext: rancher-desktop
+
+
