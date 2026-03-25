@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: solr-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce # This access mode means it can be mounted as read-write by a single node
+  resources:
+    requests:
+      storage: 5Gi # Request the amount of storage you need

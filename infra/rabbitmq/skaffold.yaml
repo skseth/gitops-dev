@@ -1,0 +1,31 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: infra-rabbitmq
+manifests:
+  kustomize:
+    paths:
+      - overlays/base
+deploy:
+  kubectl:
+    defaultNamespace: infra
+
+profiles:
+  - name: dev
+    activation:
+      - kubeContext: rancher-desktop
+    manifests:
+      kustomize:
+        paths:
+          - overlays/dev
+    portForward:
+    - resourceType: service
+      resourceName: rabbitmq
+      port: 5672
+      localPort: 5672
+
+    - resourceType: service
+      resourceName: rabbitmq
+      port: 15672
+      localPort: 15672
+

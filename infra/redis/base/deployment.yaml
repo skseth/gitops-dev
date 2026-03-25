@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis-container
+        image: redis:alpine
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf"] # Use the config file
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: redis-config-volume
+          mountPath: /usr/local/etc/redis
+      volumes:
+      - name: data
+        emptyDir: {} # Ephemeral storage, good for testing
+      - name: redis-config-volume
+        configMap:
+          name: redis-config
+          items:
+          - key: redis.conf
+            path: redis.conf

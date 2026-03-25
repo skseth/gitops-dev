@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cassandra
+spec:
+  serviceName: "cassandra"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cassandra
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: cassandra-pvc
+      containers:
+      - name: cassandra
+        image: cassandra:latest
+        ports:
+        - containerPort: 9042
+          name: cql
+        env:
+        - name: JVM_OPTS
+          value: "-Xms1G -Xmx1G"
+        # resources:
+        #   requests:
+        #     cpu: "500m"
+        #     memory: "1Gi"
+        #   limits:
+        #     cpu: "1000m"
+        #     memory: "2Gi"
+        volumeMounts:
+        - name: storage
+          mountPath: /var/lib/cassandra
+

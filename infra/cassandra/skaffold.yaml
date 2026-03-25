@@ -1,0 +1,26 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: infra-cassandra
+manifests:
+  kustomize:    
+    paths:
+      - overlays/base
+
+profiles:
+  - name: dev
+    activation:
+      - kubeContext: rancher-desktop
+    manifests:
+      kustomize:
+        paths:
+          - overlays/dev
+    deploy:
+      kubectl:
+        defaultNamespace: infra
+    portForward:
+    - resourceType: service
+      resourceName: cassandra
+      port: 9042
+      localPort: 9042
+

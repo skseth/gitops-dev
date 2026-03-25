@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: solr-standalone
+spec:
+  serviceName: "solr-standalone-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: solr-standalone
+  template:
+    metadata:
+      labels:
+        app: solr-standalone
+    spec:
+      containers:
+      - name: solr
+        image: solr:latest
+        ports:
+        - containerPort: 8983
+        volumeMounts:
+        - name: solr-persistent-storage
+          mountPath: /var/solr
+  volumeClaimTemplates:
+  - metadata:
+      name: solr-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi

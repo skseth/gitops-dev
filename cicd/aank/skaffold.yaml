@@ -6,7 +6,7 @@ metadata:
 manifests:
   kustomize:
     paths:
-      - ./k8s//overlays/dev
+      - ./k8s/overlays/dev
 
 requires:
   - path: ./spring-boot-k8s

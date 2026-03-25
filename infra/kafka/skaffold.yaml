@@ -2,8 +2,8 @@ apiVersion: skaffold/v4beta13
 kind: Config
 metadata:
   name: infra-kafka
-deploy:
-  kustomize:
+manifests:
+  kustomize:    
     paths:
       - overlays/base
 
@@ -11,10 +11,13 @@ profiles:
   - name: dev
     activation:
       - kubeContext: rancher-desktop
-    deploy:
+    manifests:
       kustomize:
         paths:
           - overlays/dev
+    deploy:
+      kubectl:
+        defaultNamespace: infra
     portForward:
       - resourceType: service
         resourceName: kafka-service

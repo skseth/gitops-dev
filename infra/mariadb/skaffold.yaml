@@ -6,6 +6,9 @@ manifests:
   kustomize:
     paths:
       - overlays/base
+deploy:
+  kubectl:
+    defaultNamespace: infra
 
 profiles:
   - name: dev
@@ -14,11 +17,10 @@ profiles:
     manifests:
       kustomize:
         paths:
-          - overlays/dev
-      
-portForward:
-- resourceType: service
-  resourceName: mariadb-service
-  port: 3306
-  localPort: 3306
+          - overlays/dev  
+    portForward:
+    - resourceType: service
+      resourceName: mariadb-service
+      port: 3306
+      localPort: 3306
 

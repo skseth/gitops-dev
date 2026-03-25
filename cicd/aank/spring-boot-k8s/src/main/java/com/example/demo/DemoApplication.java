@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 @RestController
 public class DemoApplication {
 
-    @Value("${spring.app.name:not-set}")
+    @Value("${spring.application.name:not-set}")
     String appName;
 
     public static void main(String[] args) {

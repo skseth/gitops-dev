@@ -16,3 +16,8 @@ deploy:
         - "--server-side"
         - "--force-conflicts"
 
+portForward:
+  - resourceType: service
+    resourceName: argocd
+    port: 443
+    localPort: 8080

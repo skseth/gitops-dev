@@ -1,0 +1,20 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: admin
+build:
+  local:
+    useDockerCLI: true
+    useBuildkit: true
+    push: false
+  artifacts:
+    - image: admin
+      context: ./src
+      docker:
+        dockerfile: Dockerfile
+manifests:
+   kustomize:
+      paths:
+       - overlays/dev
+deploy:
+  kubectl: {}

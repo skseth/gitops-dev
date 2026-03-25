@@ -1,0 +1,26 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: infra-redis
+manifests:
+  kustomize:
+    paths:
+      - overlays/base
+deploy:
+  kubectl:
+    defaultNamespace: infra
+
+profiles:
+  - name: dev
+    activation:
+      - kubeContext: rancher-desktop
+    manifests:
+      kustomize:
+        paths:
+          - overlays/dev
+    portForward:
+    - resourceType: deployment
+      resourceName: redis-deployment
+      port: 6379
+      localPort: 6379
+

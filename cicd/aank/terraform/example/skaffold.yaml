@@ -1,15 +1,20 @@
 apiVersion: skaffold/v4beta13
 kind: Config
 metadata:
-  name: aank        
+  name: aank
 
 requires:
   - path: ../../../../infra/mariadb
   - path: ../../../../infra/minio
+  - path: ../../../../infra/kafka
+  - path: ../../../../infra/redis
+  - path: ../../../../infra/rabbitmq
+  - path: ../../../../infra/cassandra
+  - path: ../../../../infra/solr
 
-profiles:
-  - name: dev
-    activation:
-      - kubeContext: rancher-desktop
-
-
+portForward:
+- resourceType: service
+  resourceName: argocd-server
+  namespace: argocd
+  port: 443
+  localPort: 8080

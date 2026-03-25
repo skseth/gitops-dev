@@ -18,3 +18,7 @@ argocd app create guestbook --repo https://github.com/argoproj/argocd-example-ap
 argocd app get guestbook
 argocd app sync guestbook
 
+argocd repo add 
+
+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
+
